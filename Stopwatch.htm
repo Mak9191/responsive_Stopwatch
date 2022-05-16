@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StopWatch</title>
+  <script src="2.js"></script>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      font-size: 13px;
+      background-color: whitesmoke;
+    }
+
+    #headingpart {
+      font-size: 3rem;
+      color: white;
+    }
+
+    .sect {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      margin-top: 100px;
+      width: 100vw;
+      height: 335px;
+    }
+    button {
+      padding: 10px;
+      font-weight: bolder;
+      /* font-size: larger; */
+      font-size: 25px;
+      cursor: pointer;
+      margin: 0px 10px;
+    }
+    #box3 {
+      width: 150px;
+    }
+    #timenote {
+      font-size: 5rem;
+      text-align: center;
+    }
+    .boxcontent {
+      font-size: 1px;
+    }
+    .boxcount {
+      font-size: 6rem;
+    }
+    #firstbox {
+      display: flex;
+      height: 150px;
+      border: 2px solid black;
+      flex-direction: column;
+      padding: 10px;
+      border-radius: 15px;
+      justify-content: center;
+    }
+    #secondbox {
+      display: flex;
+      height: 150px;
+      border: 2px solid black;
+      flex-direction: column;
+      padding: 10px;
+      border-radius: 15px;
+      text-align: center;
+      justify-content: center;
+    }
+    #thirdbox {
+      display: flex;
+      height: 150px;
+      border: 2px solid black;
+      flex-direction: column;
+      text-align: center;
+      padding: 10px;
+      border-radius: 15px;
+      justify-content: center;
+    }
+    .boxcontent {
+      font-size: 2rem;
+      text-align: center;
+
+    }
+    #heading {
+      background-color: black;
+      color: white;
+      background-color: #303030;
+      font-size: 3rem;
+      font-family: 'Times New Roman', Times, serif;
+      text-align: center;
+      padding: 15px;
+    }
+    #tim {
+      margin-top: 15px;
+      font-size: 3rem;
+    }
+    .btns {
+      border-radius: 15px;
+      font-size: 2rem;
+      background-color: palegreen;
+    }
+    @media (max-width:850px) {
+      * {
+        font-size: 10px;
+      }
+    }
+    @media (max-width:508px) {
+      * {
+        font-size: 9px;
+      }
+      .boxcount {
+        font-size: 4.5rem;
+      }
+      #firstbox {
+        height: 100px;
+      }
+      #secondbox {
+        height: 100px;
+      }
+      #thirdbox {
+        display: none;
+        height: 100px;
+      }
+      #tim {
+        font-size: 2.5rem;
+      }
+      button {
+        padding: 9px;
+        font-weight: bolder;
+        font-size: 25px;
+        cursor: pointer;
+        margin: 0px 5px;
+      }
+      #heading {
+        font-size: 2.5rem;
+      }
+    }
+    @media (max-width:311px) {
+      #heading {
+        font-size: 2rem;
+      }
+      .btnsection {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin: auto;
+      }
+      button {
+        margin: 1px;
+      }
+      #tim{
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="heading">Welcome to the Stopwatch</div>
+  <section class="sect">
+    <div id="firstbox">
+      <div id="box1" class="boxcount">00</div>
+      <div class="boxcontent ">Minutes</div>
+    </div>
+    <div id="secondbox">
+      <div id="box2" class="boxcount">00</div>
+      <div class="boxcontent ">Seconds</div>
+    </div>
+    <div id="thirdbox">
+      <div id="box3" class="boxcount">00</div>
+      <div class="boxcontent ">Centi-Seconds</div>
+    </div>
+  </section>
+  <section class="btnsection">
+    <button class="btns" onclick="startwatch()">Start</button>
+    <button class="btns" onclick="stopwatch()">Stop</button>
+    <button class="btns" onclick="resetwatch()">Reset</button>
+    <button class="btns" onclick="notewatch()">Note</button>
+  </section>
+  <section id="timenote"></section>
+  <script>
+    var ti = 00;
+    var timemin = 0;
+    var timesec = 0;
+    let showtime = () => {
+      let stopingt = "0" + timemin + ":" + timesec + ":" + ti;
+      let stopingt1 = timemin + ":" + timesec + ":" + ti
+      if (timesec == 60) {
+        document.getElementById("box2").innerHTML = "00";
+        if (timemin >= 0 && timemin < 9) {
+          timesec = 0;
+          timemin = timemin + 1;
+          timeminute = "0" + timemin;
+          let time2 = document.getElementById("box1").innerHTML = timeminute;
+        }
+        else {
+          timesec = 0;
+          timemin = timemin + 1;
+          let time2 = document.getElementById("box1").innerHTML = timemin;
+        }
+      }
+      if (ti == 100) {
+        ti = 0;
+
+        if (timesec == 0 || timesec == 1 || timesec == 2 || timesec == 3 || timesec == 4 || timesec == 5 || timesec == 6 || timesec == 7 || timesec == 8) {
+          ++timesec;
+          let time_1 = "0" + timesec
+          let time1 = document.getElementById("box2").innerHTML = time_1;
+        }
+        else {
+          timesec++;
+          let time1 = document.getElementById("box2").innerHTML = timesec
+        }
+
+      }
+      let time1 = document.getElementById("box3");
+      if (ti >= 0 && ti < 10) {
+        let timmili = "0" + ti;
+        time1.innerHTML = timmili;
+        ti++;
+      }
+      else {
+        time1.innerHTML = ti;
+        ti++;
+      }
+    }
+    function startwatch() {
+      console.log("Starting the watch again");
+      clearInterval(stop);
+      stop = setInterval(showtime, 10);
+    }
+    function stopwatch() {
+      console.log("Stopping the watch");
+      clearInterval(stop);
+    }
+    function resetwatch() {
+      clearInterval(stop)
+      box1.innerHTML = "00";
+      box2.innerHTML = "00";
+      box3.innerHTML = "00";
+      ti = 00;
+      timesec = 00;
+      timemin = 00;
+      timenote.innerHTML = ``;
+    }
+    var num = 0;
+    function notewatch() {
+      console.log("Noting the time");
+      timenote.innerHTML = `<section> <p id="tim">The Noted time is:<br> ${timemin} min : ${timesec} sec : ${ti} centi-sec \n </p> </section>`;
+      num++;
+    }
+    text = `The Noted time is ${timemin}  : ${timesec} seconds : ${ti} centi-seconds  \n`
+  </script>
+</body>
+
+</html>
